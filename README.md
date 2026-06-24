@@ -1,6 +1,115 @@
-# VLLM Project
+<div align="center">
 
-이 문서는 프로젝트를 처음 보는 사람이 Phase 1-3의 목적, 실험 환경, 방법론, 메트릭, 결과 해석, 산출물 위치를 한 번에 이해할 수 있도록 정리한 최종 설명 문서다. 특히 Phase 2와 Phase 3의 robustness 및 explanation 분석을 중심으로 작성했다.
+# 🚗 Qwen2.5-VL VQA Robustness & Grad-CAM
+
+**Decision & explanation robustness of a Vision-Language Model on autonomous-driving "can I proceed straight?" VQA**
+
+자율주행 전방 도로 이미지에 대한 Qwen2.5-VL의 직진 가능 판단이
+adversarial attack · semantic perturbation에서 얼마나 안정적인지,
+그리고 그 시각적 판단 근거(Grad-CAM)가 stop cue에 남아 있는지를 검증한다.
+
+<br/>
+
+![Model](https://img.shields.io/badge/Model-Qwen2.5--VL--3B--Instruct-1f6feb)
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-MPS-EE4C2C?logo=pytorch&logoColor=white)
+![Attacks](https://img.shields.io/badge/Attacks-FGSM%20%7C%20PGD-d1242f)
+![XAI](https://img.shields.io/badge/XAI-Grad--CAM-2da44e)
+
+</div>
+
+---
+
+> 이 문서는 프로젝트를 처음 보는 사람이 Phase 1-3의 목적, 실험 환경, 방법론, 메트릭, 결과 해석, 산출물 위치를 한 번에 이해할 수 있도록 정리한 최종 설명 문서다. 특히 Phase 2와 Phase 3의 robustness 및 explanation 분석을 중심으로 작성했다.
+
+## 📑 Table of Contents
+
+- [🗂 Project Structure](#-project-structure)
+- [⭐ Key Results](#-key-results)
+- [1. 연구 개요](#1-연구-개요)
+- [2. 실험 환경](#2-실험-환경)
+- [3. 데이터와 태스크 정의](#3-데이터와-태스크-정의)
+- [4. Phase 1: Prompt Optimization](#4-phase-1-prompt-optimization)
+- [5. Phase 2: Decision Robustness](#5-phase-2-decision-robustness)
+- [6. Phase 3: Explanation Robustness](#6-phase-3-explanation-robustness)
+- [7. Phase 3 SOAR Evidence Box](#7-phase-3-soar-evidence-box)
+- [8. Phase 3 메트릭 상세](#8-phase-3-메트릭-상세)
+- [9. Phase 3 정량 결과](#9-phase-3-정량-결과)
+- [10. Phase 3 그래프 및 이미지 결과 읽는 법](#10-phase-3-그래프-및-이미지-결과-읽는-법)
+- [11. 주요 산출물](#11-주요-산출물)
+- [12. 실행 방법](#12-실행-방법)
+- [13. 한계와 주의사항](#13-한계와-주의사항)
+- [14. 최종 요약](#14-최종-요약)
+
+## 🗂 Project Structure
+
+```text
+VLLM_Project/
+├── data/raw/                        # 원본 도로 이미지 (image1, image2)
+├── experiments/
+│   ├── phase1/                      # Phase 1 · Prompt / output-budget 최적화 (TALE-EP)
+│   │   ├── phase1_clean_vqa.py
+│   │   └── phase1_clean_vqa.ipynb
+│   ├── phase2/                      # Phase 2 · Adversarial attack + semantic perturbation
+│   │   ├── phase2_adversarial_attack.ipynb
+│   │   └── create_phase2_semantic_clean_report.py
+│   ├── phase3/                      # Phase 3 · Grad-CAM explanation robustness
+│   │   ├── phase3_gradcam.py
+│   │   ├── phase3_attention_heatmap.ipynb
+│   │   └── create_phase3_gradcam_report.py
+│   ├── adversarial_images/          # FGSM/PGD 생성 이미지 (Phase 2)
+│   ├── semantic_perturbations/      # weather/illumination/camera 변형 (Phase 2 → Phase 3 공유)
+│   └── results/                     # 모든 산출물 (metrics, 그림, PDF report)
+├── docs/                            # 실행 가이드 · plan
+├── README.md
+└── requirements.txt
+```
+
+> 각 phase 스크립트는 실행 위치와 무관하게 저장소 루트를 자동 탐색하므로, 저장소 루트 또는 그 하위 어디서든 실행할 수 있다. 대용량 모델 체크포인트(`experiments/results/checkpoints/`)는 용량 문제로 저장소에서 제외되어 있다.
+
+## ⭐ Key Results
+
+<table>
+<tr><td>
+
+**Phase 2 — Decision Robustness**
+<br/>(44 conditions · FGSM/PGD + semantic)
+
+| Metric | Value |
+|---|---:|
+| Unsafe `Proceed` flips | **0** |
+| Decision flips (any) | **0** |
+| `Do not proceed` (held) | 35 |
+| `Cannot determine` (degraded) | 9 |
+
+</td><td>
+
+**Phase 3 — Explanation Robustness**
+<br/>(14 images · Grad-CAM SOAR / drift)
+
+| Highlight | Image | Value |
+|---|---|---:|
+| Clean SOAR | `clean` | 0.247 |
+| Max CAM drift | `camera_low_light_sensor_noise` | 0.276 |
+| Min SOAR | `camera_jpeg_q45` | 0.115 |
+
+</td></tr>
+</table>
+
+- **Decision level:** 공격·변형에도 `Proceed`로 잘못 뒤집힌 사례는 **0건**. 다만 low-light / blur / sensor-noise에서 `Cannot determine`이 발생하며 perception confidence가 저하됐다.
+- **Explanation level:** 가장 위험한 패턴은 **high CAM drift + low SOAR** (low-light sensor noise, JPEG q45, night low-light) — 판단은 유지되지만 시각적 근거가 stop cue 밖으로 이동했을 가능성이 높다.
+
+| Clean: input vs Grad-CAM | Per-condition drift / SOAR |
+|:---:|:---:|
+| ![clean Grad-CAM](experiments/results/phase3_gradcam/pairs/clean_input_vs_gradcam.png) | ![metric bars](experiments/results/phase3_gradcam/phase3_gradcam_metric_bars.png) |
+
+<div align="center">
+
+**Top-5 CAM drift comparison vs clean**
+
+<img src="experiments/results/phase3_gradcam/phase3_gradcam_top5_drift_comparison.png" width="900" alt="top-5 drift comparison"/>
+
+</div>
 
 ## 1. 연구 개요
 
