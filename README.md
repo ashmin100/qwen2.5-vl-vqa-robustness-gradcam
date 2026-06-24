@@ -1,4 +1,4 @@
-# VLLM Project Final README
+# VLLM Project
 
 이 문서는 프로젝트를 처음 보는 사람이 Phase 1-3의 목적, 실험 환경, 방법론, 메트릭, 결과 해석, 산출물 위치를 한 번에 이해할 수 있도록 정리한 최종 설명 문서다. 특히 Phase 2와 Phase 3의 robustness 및 explanation 분석을 중심으로 작성했다.
 
