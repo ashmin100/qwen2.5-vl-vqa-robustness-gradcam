@@ -1,0 +1,20 @@
+perturbation,category,drift,soar,decision
+clean,basic,0.0,0.1562,Decision: [Do not proceed / Cannot determine]
+blur,basic,0.0368,0.287,Decision: Cannot determine
+noise,basic,0.0387,0.1858,Decision: [Cannot determine]
+translate_right,basic,0.118,0.3215,Decision: Cannot determine
+occlude_top50,basic,0.045,0.254,Decision: Do not proceed
+occlude_bottom50,basic,0.0536,0.353,Decision: Do not proceed
+weather_fog_mild,weather,0.0368,0.1413,Decision: Do not proceed
+weather_fog_dense,weather,0.0546,0.2744,Decision: Cannot determine
+weather_rain_streaks,weather,0.0752,0.2205,Decision: Cannot determine
+weather_snow_particles,weather,0.0359,0.2426,Decision: Do not proceed
+weather_dust_haze,weather,0.0408,0.2382,Decision: Do not proceed
+illumination_sun_glare,illumination,0.057,0.2079,Decision: Do not proceed
+illumination_night_low_light,illumination,0.0557,0.3846,Decision: Cannot determine
+camera_motion_blur,camera,0.0566,0.2708,Decision: Cannot determine
+camera_defocus_blur,camera,0.0399,0.275,Decision: Cannot determine
+camera_windshield_droplets,camera,0.0338,0.1535,Decision: Do not proceed
+camera_jpeg_q45,camera,0.0384,0.2151,Decision: Do not proceed
+camera_resolution_drop_070,camera,0.0365,0.2703,Decision: Do not proceed
+camera_low_light_sensor_noise,camera,0.0374,0.2366,Decision: [Cannot determine]

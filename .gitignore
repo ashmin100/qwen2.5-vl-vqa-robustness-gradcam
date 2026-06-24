@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Local tooling state
+.bkit/
+.claude/
+
+# Large model checkpoints (1.2GB, exceed GitHub 100MB limit)
+experiments/results/checkpoints/
+
+# Course / planning materials (excluded from public repo)
+강의자료/
+plan/

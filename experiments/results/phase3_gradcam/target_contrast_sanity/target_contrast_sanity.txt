@@ -1,0 +1,3 @@
+do_not_proceed_score=-0.269446
+proceed_score=-0.990663
+raw_gradcam_l2_diff=0.169348

@@ -1,0 +1,43 @@
+attack,epsilon,direct_flip,reprocessed_flip,direct_output,reprocessed_output
+fgsm,eps01,False,False,"Decision: Do not proceed
+Evidence: The pedestrian crossing is clearly marked with white lines, indicating that it is safe for pedestrians to cross. However, there is no visible traffic light or pedestrian signal that would allow vehicles to proceed straight through the intersection. Additionally, the presence of multiple lanes and the lack of any visible barriers","Decision: Cannot determine
+Evidence: The image shows a busy urban street with multiple lanes and vehicles. There are no clear signs or markings indicating a specific direction for vehicles to proceed. The presence of multiple lanes and the lack of clear signage make it difficult to determine if the vehicle can proceed straight without additional context."
+fgsm,eps02,False,False,"Decision: Do not proceed
+Evidence: The pedestrian crossing is occupied by people, indicating that it is unsafe for vehicles to proceed straight through the intersection.","Decision: Do not proceed
+Evidence: The image shows a pedestrian crossing with a yellow pedestrian signal light, indicating that pedestrians should not proceed until the light changes to green."
+fgsm,eps03,False,False,"Decision: Do not proceed
+Evidence: The pedestrian crossing is active, indicating that vehicles must stop for pedestrians to cross safely.","Decision: Do not proceed
+Evidence: The image shows a pedestrian crossing with multiple barriers and cones blocking the path. There are no clear signs indicating that vehicles can proceed straight through this area. The presence of these barriers suggests that the area is designed for pedestrians only, and vehicles should not attempt to cross or proceed through it"
+fgsm,eps04,False,False,"Decision: Do not proceed
+Evidence: The pedestrian crossing is active, and there is a person walking across it. This indicates that the road is currently being used by pedestrians, which means vehicles cannot proceed straight without stopping for them.","Decision: Cannot determine
+Evidence: The image shows a busy urban street with multiple lanes and various vehicles, including cars and buses. There are no clear signs or signals indicating whether it is safe to proceed straight. The presence of multiple lanes and the complexity of the intersection make it difficult to determine if the vehicle can safely proceed"
+fgsm,eps06,False,False,"Decision: Do not proceed
+Evidence: The pedestrian crossing is empty, and there are no visible traffic lights or signs indicating that vehicles can proceed straight.","Decision: Do not proceed
+Evidence: The image shows a pedestrian crossing with multiple barriers and cones blocking the path. There is no clear indication of a safe path for vehicles to proceed straight without obstructing pedestrians."
+fgsm,eps08,False,False,"Decision: Do not proceed
+Evidence: The pedestrian crossing signal shows a red hand, indicating that it is not safe to cross the street. Additionally, there is a bus approaching from the opposite direction, which would obstruct the view of any potential traffic signals or pedestrians.","Decision: Do not proceed
+Evidence: The image shows a pedestrian crossing with multiple lanes of traffic. There are no visible signals or signs indicating that vehicles can proceed straight through this intersection. The presence of pedestrians and the layout of the road suggest that the area is designed for pedestrian use, and it is likely that vehicles must"
+fgsm,eps12,False,False,"Decision: Do not proceed
+Evidence: The pedestrian crossing signal shows a red light, indicating that it is not safe to proceed through the crosswalk.","Decision: Cannot determine
+Evidence: The image shows a busy urban intersection with multiple lanes of traffic, including buses and cars. There are no clear signs or signals indicating whether vehicles can proceed straight. The presence of multiple lanes and the lack of specific signage make it impossible to determine if any vehicle has the right of way to"
+fgsm,eps16,False,False,"Decision: Do not proceed
+Evidence: The pedestrian crossing signal shows a red light, indicating that it is not safe for vehicles to proceed straight through the intersection.","Decision: Do not proceed
+Evidence: The pedestrian crossing is active with a red light, indicating that vehicles must stop before proceeding."
+pgd,eps02,False,False,"Decision: Do not proceed
+Evidence: The pedestrian crossing is clearly marked with white lines, indicating that it is safe for pedestrians to cross. However, there is no visible traffic light or pedestrian signal that would allow vehicles to proceed straight through the intersection. Additionally, the presence of multiple lanes and the direction of the traffic suggest","Decision: Cannot determine
+Evidence: The image shows a collage of multiple perspectives of a city street with various vehicles and pedestrians. There is no clear indication of traffic signals or signs that would allow for a determination of whether a vehicle may proceed straight."
+pgd,eps04,False,False,"Decision: Cannot determine
+Evidence: The image shows a busy urban street with multiple lanes of traffic, including cars and buses. There are no clear signs or signals indicating whether vehicles can proceed straight or not. The presence of pedestrians and other vehicles also makes it difficult to determine the specific rules for straight-ahead movement.","Decision: Do not proceed
+Evidence: The image shows a pedestrian crossing with a yellow pedestrian signal light, indicating that pedestrians should not proceed until the light changes to green."
+pgd,eps06,False,False,"Decision: Cannot determine
+Evidence: The image shows a busy city street with multiple lanes of traffic, including cars and buses. There are no clear signs or signals indicating whether vehicles can proceed straight or not. The presence of pedestrians and other obstacles also makes it difficult to determine the specific rules for vehicle movement.","Decision: Do not proceed
+Evidence: The image shows a pedestrian crossing with barriers and signs indicating that vehicles should stop or slow down when pedestrians are crossing. The presence of these barriers and signs suggests that the road is currently restricted for vehicle movement, making it unsafe to proceed."
+pgd,eps08,False,False,"Decision: Do not proceed
+Evidence: The image shows a pedestrian crossing with no visible traffic lights or pedestrians moving towards the intersection.","Decision: Do not proceed
+Evidence: The image shows a pedestrian crossing with a yellow sign indicating ""Do not cross."" This sign is clearly visible and indicates that vehicles should not proceed through this area."
+pgd,eps12,False,False,"Decision: Do not proceed
+Evidence: The pedestrian crossing is active, indicating that vehicles must stop for pedestrians to cross.","Decision: Do not proceed
+Evidence: The image shows a pedestrian crossing with barriers in place, indicating that vehicles should stop or slow down to allow pedestrians to cross safely. The presence of these barriers suggests that the road is currently closed for pedestrian use, which means vehicles cannot proceed straight through this area."
+pgd,eps16,False,False,"Decision: Do not proceed
+Evidence: The pedestrian is crossing the street, which means the vehicle must stop for them to cross safely.","Decision: Do not proceed
+Evidence: The image shows a pedestrian crossing with barriers in place, indicating that vehicles must stop for pedestrians to cross safely. This suggests that the vehicle cannot proceed straight without stopping."

@@ -1,0 +1,8 @@
+torch
+torchvision
+transformers
+qwen-vl-utils
+Pillow
+matplotlib
+numpy
+huggingface_hub
